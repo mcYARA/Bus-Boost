@@ -11,7 +11,7 @@
             <template v-slot:tbody>
                 <tr v-for="busLine in $store.getters.getBusLines">
                     <td>{{busLine.depart_settlement}}</td>
-                    <td>{{busLine.depart_time}}</td>
+                    <td>{{busLine.depart_time_str}}</td>
                     <td>{{busLine.arrive_settlement}}</td>
                     <td>{{busLine.arrive_settlement}}</td>
                     <td class="min-width">

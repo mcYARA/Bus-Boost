@@ -4,7 +4,9 @@ from .models import *
 
 @admin.register(BusLine)
 class BusLineAdmin(admin.ModelAdmin):
-    list_display = ('depart_settlement', 'depart_time', 'arrive_settlement', 'arrive_time', 'count_of_seats', 'price',)
+    list_display = (
+        'pk', 'depart_settlement', 'depart_time', 'arrive_settlement', 'arrive_time', 'count_of_seats', 'price',
+    )
 
 
 @admin.register(Ticket)

@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class SeatsDoesntAvailable(Exception):
+    pass
+
+
 class BusLine(models.Model):
     class Meta:
         verbose_name = 'рейс'
@@ -16,6 +20,24 @@ class BusLine(models.Model):
     price = models.FloatField('Ціна')
 
     count_of_seats = models.SmallIntegerField('Кільсть сидінь')
+
+    def has_available_seats(self):
+        """
+        Перевіряє чи є доступні місця
+        :return: True, або False
+        """
+        if self.ticket_set.count() < self.count_of_seats:
+            return True
+        return False
+
+    def book_ticket(self, user):
+        if not self.has_available_seats():
+            raise SeatsDoesntAvailable
+        Ticket.objects.create(
+            user=user,
+            seat_number=self.ticket_set.count() + 1,
+            bus_line=self,
+        )
 
     def __str__(self):
         return f'{self.depart_settlement} - {self.arrive_settlement}'

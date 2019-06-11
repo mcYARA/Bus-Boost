@@ -2,6 +2,12 @@ from .models import *
 from rest_framework import serializers
 
 
+class TicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ('seat_number', 'bus_line')
+
+
 class BusLineSerializer(serializers.ModelSerializer):
     depart_time_str = serializers.SerializerMethodField('depart_time')
 

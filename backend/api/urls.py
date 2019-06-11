@@ -4,6 +4,7 @@ from .views import *
 
 router = routers.DefaultRouter()
 router.register(r'buslines', BusLineViewSet)
+router.register(r'tickets', BusLineViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -1,32 +1,39 @@
 <template>
-    <div id="app">
+    <div id="app" >
         <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="col-lg-3" id="nav" v-if="$store.state.loggedIn">
-                    <h3 id="brand-name">FinManager</h3>
+            <div class="row justify-content-md-center" >
+                <div class="col-lg-3" id="nav" v-if="$store.state.loggedIn" >
+                    <div class="navbar navbar-light" style="background-color: #FFFFFF;" >
+                    <h3 id="brand-name">Bus Boost</h3>
                     <div class="nav-menu">
-                        <router-link to="/categories" class="nav-element">
-                            Categories
+                        <router-link to="/ -" class="nav-element">
+                            Головна
                         </router-link>
                         <router-link to="/transactions" class="nav-element">
-                            Transactions
+                            Список білетів
                         </router-link>
                         <router-link to="/charts" class="nav-element">
-                            Charts
+                            Про нас
+                        </router-link>
+                         <router-link to="/charts" class="nav-element">
+                            Контакти
                         </router-link>
                         <a href="#" @click.prevent="$store.dispatch('logout')" class="nav-element">
-                            Sign Out
+                            Вийти
                         </a>
+                    </div>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <router-view/>
+
                 </div>
             </div>
         </div>
         <!-- set progressbar -->
         <vue-progress-bar></vue-progress-bar>
     </div>
+
 </template>
 
 <script>
@@ -54,6 +61,7 @@
     html, body {
         background: #eee;
     }
+
 
     #app {
         background: #eee;

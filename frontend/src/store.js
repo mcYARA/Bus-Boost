@@ -4,7 +4,7 @@ import axios from 'axios'
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-axios.defaults.baseURL = '/api/'
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api/'
 
 const authToken = localStorage.getItem('authToken')
 if (authToken) {
@@ -17,6 +17,7 @@ export default new Vuex.Store({
     state: {
         loggedIn: false,
         user: '',
+        busLines: [],
     },
     getters: {
         getAuth(state) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
         getUserInfo(state) {
             return state.user
         },
+        getBusLines(state) {
+            return state.busLines
+        }
     },
     mutations: {
         setLoggined(state) {
@@ -41,6 +45,9 @@ export default new Vuex.Store({
         },
         setUserInfo(state, value) {
             state.user = value
+        },
+        setBusLines(state, value) {
+            state.busLines = value
         },
     },
     actions: {
@@ -61,6 +68,15 @@ export default new Vuex.Store({
                     delete axios.defaults.headers['Authorization']
                     localStorage.removeItem('authToken')
                     router.push('login')
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        },
+        updateBusLines(context) {
+            return axios.get('buslines/')
+                .then(response => {
+                    context.commit('setBusLines', response.data)
                 })
                 .catch(e => {
                     console.log(e)

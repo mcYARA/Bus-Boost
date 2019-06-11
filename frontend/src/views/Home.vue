@@ -14,7 +14,9 @@
                     <td>{{busLine.depart_time}}</td>
                     <td>{{busLine.arrive_settlement}}</td>
                     <td>{{busLine.arrive_settlement}}</td>
-                    <td class="min-width">Тут буде кнопка</td>
+                    <td class="min-width">
+                        <button-component @click.native="$store.dispatch('bookTicket', busLine.pk)">Бронювати</button-component>
+                    </td>
                 </tr>
             </template>
         </list-table>
@@ -24,10 +26,11 @@
 <script>
     import InputBox from '@/components/InputBox.vue'
     import ListTable from '@/components/ListTable.vue'
+    import ButtonComponent from '@/components/ButtonComponent.vue'
 
     export default {
         name: "Categories",
-        components: {InputBox, ListTable},
+        components: {InputBox, ListTable, ButtonComponent},
         data() {
             return {
                 newCategory: {

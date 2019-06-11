@@ -82,5 +82,14 @@ export default new Vuex.Store({
                     console.log(e)
                 })
         },
+        bookTicket(context, pk) {
+            return axios.get('/buslines/' + pk + '/book_ticket/')
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        },
     }
 })

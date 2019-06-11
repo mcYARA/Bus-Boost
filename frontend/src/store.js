@@ -38,7 +38,7 @@ export default new Vuex.Store({
             localStorage.setItem('authToken', token)
             state.loggedIn = true
             axios.defaults.headers['Authorization'] = "Token " + localStorage.getItem('authToken')
-            router.push('/categories')
+            router.push('/')
         },
         setLoggedOut(state) {
             state.loggedIn = false

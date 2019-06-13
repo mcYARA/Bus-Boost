@@ -5,6 +5,7 @@
                 <th scope="col">Пункт відправлення</th>
                 <th scope="col">Час відправлення</th>
                 <th scope="col">Пункт прибуття</th>
+                <th scope="col">Час прибуття</th>
                 <th scope="col">Ціна</th>
                 <th scope="col">Delete</th>
             </template>
@@ -13,6 +14,7 @@
                     <td>{{busLine.depart_settlement}}</td>
                     <td>{{busLine.depart_time_str}}</td>
                     <td>{{busLine.arrive_settlement}}</td>
+                    <td>{{busLine.arrive_time_str}}</td>
                     <td>{{busLine.price}}</td>
                     <td class="min-width">
                         <button-component @click.native="$store.dispatch('bookTicket', busLine.pk)">Бронювати</button-component>

@@ -17,7 +17,8 @@
                     <td>{{busLine.arrive_time_str}}</td>
                     <td>{{busLine.price}}</td>
                     <td class="min-width">
-                        <button-component @click.native="$store.dispatch('bookTicket', busLine.pk)">Бронювати</button-component>
+                        <button-component @click.native="bookTicket(busLine)">Бронювати
+                        </button-component>
                     </td>
                 </tr>
             </template>
@@ -39,6 +40,13 @@
             },
             updated() {
                 this.$Progress.finish()
+            },
+            bookTicket(busLine) {
+                this.$store.dispatch('bookTicket', busLine.pk)
+                this.$bvToast.toast(`Вітаємо, ви успішно забронювали квиток на рейс ${busLine.depart_settlement} - ${busLine.arrive_settlement} на ${busLine.arrive_time_str}`, {
+                    title: 'Успішне бронювання',
+                    toaster: 'b-toaster-bottom-right',
+                })
             }
         },
         created() {

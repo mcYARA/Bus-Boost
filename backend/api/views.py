@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class BusLineViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = BusLine.objects.all()
+    queryset = BusLine.objects.all().order_by('-id')
     serializer_class = BusLineSerializer
     pagination_class = None
 
@@ -28,4 +28,4 @@ class TicketViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self, *args, **kwargs):
-        return Ticket.objects.all().filter(user=self.request.user)
+        return Ticket.objects.all().filter(user=self.request.user).order_by('-id')

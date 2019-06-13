@@ -1,33 +1,19 @@
 <template>
-    <div id="app" >
-        <div class="container">
-            <div class="row justify-content-md-center" >
-                <div class="col-lg-3" id="nav" v-if="$store.state.loggedIn" >
-                    <div class="navbar navbar-light" style="background-color: #FFFFFF;" >
-                    <h3 id="brand-name">Bus Boost</h3>
-                    <div class="nav-menu">
-                        <router-link to="/ -" class="nav-element">
-                            Головна
-                        </router-link>
-                        <router-link to="/transactions" class="nav-element">
-                            Список білетів
-                        </router-link>
-                        <router-link to="/charts" class="nav-element">
-                            Про нас
-                        </router-link>
-                         <router-link to="/charts" class="nav-element">
-                            Контакти
-                        </router-link>
-                        <a href="#" @click.prevent="$store.dispatch('logout')" class="nav-element">
-                            Вийти
-                        </a>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <router-view/>
-
-                </div>
+    <div id="app">
+        <b-navbar fixed="top" type="light" v-if="$store.state.loggedIn">
+            <div class="container text-uppercase">
+                <b-navbar-nav>
+                    <b-nav-item to="/">Розклад руху</b-nav-item>
+                    <b-nav-item to="/tickets">Мої квитки</b-nav-item>
+                </b-navbar-nav>
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item @click.prevent="$store.dispatch('logout')">Вихід</b-nav-item>
+                </b-navbar-nav>
+            </div>
+        </b-navbar>
+        <div class="container" id="content">
+            <div class="justify-content-md-center">
+                <router-view/>
             </div>
         </div>
         <!-- set progressbar -->
@@ -56,8 +42,6 @@
 </script>
 
 <style lang="less">
-    @import (css) url('https://fonts.googleapis.com/css?family=Varela+Round');
-
     html, body {
         background: #eee;
     }
@@ -73,37 +57,30 @@
         color: #2c3e50;
     }
 
-    #nav {
-        #brand-name {
-            font-family: 'Varela Round', sans-serif;
-            font-weight: 700;
-            line-height: 50px;
-            padding-left: 25px;
+    #content {
+        margin-top: 80px;
+    }
+
+    .navbar-light {
+        box-shadow: 0 1px 5px -2px gray;
+        background-color: #fff !important;
+
+        a:not(.dropdown-item) {
+            text-shadow: none;
         }
 
-        .nav-element {
-            padding-left: 15px;
-            padding-right: 15px;
-            line-height: 50px;
-            font-weight: 700;
-            font-family: 'Open Sans', sans-serif;
-            display: block;
-            letter-spacing: 0.5pt;
-            color: #212529;
-            border-radius: 5px;
-
-            &:hover {
-                background: #dddddd;
-                text-decoration: none;
-            }
-
-            &.router-link-exact-active {
-                background: #E3E3E3;
-            }
-
-            svg {
-                margin-right: 5px;
-            }
+        .active a {
+            color: #536AB3 !important;
         }
+
+        .navbar-brand {
+            color: #586994 !important;
+        }
+    }
+
+    .navbar-nav .nav-link {
+        line-height: 30px;
+        font-size: 10.5pt;
+        font-weight: 500;
     }
 </style>

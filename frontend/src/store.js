@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from './router'
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -57,6 +58,7 @@ export default new Vuex.Store({
         },
         setLoggedOut(state) {
             state.loggedIn = false
+            router.push('/login')
         },
         setUserInfo(state, value) {
             state.user = value
@@ -101,12 +103,15 @@ export default new Vuex.Store({
                 })
         },
         bookTicket(context, pk) {
+            this._vm.$Progress.start()
             return axios.get('/buslines/' + pk + '/book_ticket/')
                 .then(response => {
                     console.log(response)
+                    this._vm.$Progress.finish()
                 })
                 .catch(e => {
                     console.log(e)
+                    this._vm.$Progress.error()
                 })
         },
         updateTickets(context) {

@@ -111,7 +111,7 @@ export default new Vuex.Store({
                 })
                 .catch(e => {
                     console.log(e)
-                    this._vm.$Progress.error()
+                    this._vm.$Progress.fail()
                 })
         },
         updateTickets(context) {

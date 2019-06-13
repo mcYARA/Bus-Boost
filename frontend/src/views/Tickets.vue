@@ -5,17 +5,17 @@
                 <th scope="col">Пункт відправлення</th>
                 <th scope="col">Час відправлення</th>
                 <th scope="col">Пункт прибуття</th>
-                <th scope="col">Ціна</th>
+                <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </template>
             <template v-slot:tbody>
-                <tr v-for="busLine in $store.getters.getBusLines">
-                    <td>{{busLine.depart_settlement}}</td>
-                    <td>{{busLine.depart_time_str}}</td>
-                    <td>{{busLine.arrive_settlement}}</td>
-                    <td>{{busLine.price}}</td>
+                <tr v-for="ticket in $store.getters.getTickets">
+                    <td>{{ticket.bus_line_info}}</td>
+                    <td>{{ticket.bus_line_info.depart_time_str}}</td>
+                    <td>{{ticket.arrive_settlement}}</td>
+                    <td>{{ticket.arrive_settlement}}</td>
                     <td class="min-width">
-                        <button-component @click.native="$store.dispatch('bookTicket', busLine.pk)">Бронювати</button-component>
+                        <button-component @click.native="$store.dispatch('bookTicket', ticket.pk)">Бронювати</button-component>
                     </td>
                 </tr>
             </template>
@@ -29,7 +29,7 @@
     import ButtonComponent from '@/components/ButtonComponent.vue'
 
     export default {
-        name: "Home",
+        name: "Tickets",
         components: {InputBox, ListTable, ButtonComponent},
         methods: {
             beforeUpdate() {
@@ -41,6 +41,7 @@
         },
         created() {
             this.$store.dispatch('updateBusLines')
+            this.$store.dispatch('updateTickets')
             this.$Progress.finish()
         },
         beforeUpdate() {

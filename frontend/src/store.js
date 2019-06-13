@@ -18,6 +18,7 @@ export default new Vuex.Store({
         loggedIn: false,
         user: '',
         busLines: [],
+        tickets: [],
     },
     getters: {
         getAuth(state) {
@@ -28,6 +29,20 @@ export default new Vuex.Store({
         },
         getBusLines(state) {
             return state.busLines
+        },
+        getTickets(state) {
+            let result = state.tickets
+
+            result.forEach((ticket) => {
+                let busLine = state.busLines.find(obj => {
+                    return obj.pk === ticket.bus_line
+                })
+
+                ticket.bus_line_info = busLine
+            })
+
+            console.log(result)
+            return result
         }
     },
     mutations: {
@@ -48,6 +63,9 @@ export default new Vuex.Store({
         },
         setBusLines(state, value) {
             state.busLines = value
+        },
+        setTickets(state, value) {
+            state.tickets = value
         },
     },
     actions: {
@@ -86,6 +104,15 @@ export default new Vuex.Store({
             return axios.get('/buslines/' + pk + '/book_ticket/')
                 .then(response => {
                     console.log(response)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        },
+        updateTickets(context) {
+            return axios.get('tickets/')
+                .then(response => {
+                    context.commit('setTickets', response.data)
                 })
                 .catch(e => {
                     console.log(e)

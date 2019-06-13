@@ -15,6 +15,13 @@ export default new Router({
             }
         },
         {
+            path: '/tickets',
+            name: 'tickets',
+            component: function () {
+                return import('./views/Tickets.vue')
+            }
+        },
+        {
             path: '/login',
             name: 'login',
             component: function () {

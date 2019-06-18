@@ -8,7 +8,7 @@
                         id="username"
                         v-model="username"
                 ></b-form-input>
-                <label for="pasword">Your login</label>
+                <label for="pasword">Your password</label>
                 <b-form-input
                         id="pasword"
                         v-model="password"
